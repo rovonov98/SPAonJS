@@ -1,4 +1,7 @@
 import AbstractView from "./AbstractView.js"
+import Form from "./../components/Form.js"
+import EventList from "./../components/EventList.js"
+import Filter from "./../components/Filter.js"
 
 export default class extends AbstractView {
   constructor() {
@@ -6,14 +9,13 @@ export default class extends AbstractView {
     this.setTitle("Home")
   }
   async getHtml() {
-    function setItems() {
-      return ''
-    }
+    const form = new Form
+    const eventList = new EventList
+    const filter = new Filter
     return `
-      <h1>Home</h1>
-      <div>
-      ${ setItems() }
-      </div>
+      ${ form.getForm }
+      ${ filter.getFilter() }
+      ${ eventList.getItems() }
     `
   }
 }
