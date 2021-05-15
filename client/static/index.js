@@ -51,8 +51,8 @@ const router = async () => {
   const view = new match.route.view(getParams(match))
 
   document.querySelector("#app").innerHTML = await view.getHtml()
-  addSpa()
   AddLogic(match.route.path, getParams(match))
+  addSpa()
 }
 
 window.addEventListener("popstate", router)

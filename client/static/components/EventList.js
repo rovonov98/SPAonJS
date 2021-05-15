@@ -7,7 +7,7 @@ export default class EventList {
         .map((event) => {
           return `
             <div class="event-container" id="${ event.id }">
-              <a class="link" href="events/${ event.id }"  data-link>
+              <a class="link" href="events/${ event.id }" data-link>
                 <div>
                   <div class="event-item">
                     <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
