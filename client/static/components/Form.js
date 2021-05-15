@@ -1,4 +1,5 @@
 import EventList from './EventList.js'
+import Filter from './Filter.js'
 
 export default class Form {
   constructor() {
@@ -15,14 +16,14 @@ export default class Form {
         isRequired: true,
         id: "eventStart",
         description: "Дата начала",
-        placeholder: "December 17, 1995 03:24:00"
+        placeholder: "December 17, 1995"
       },
       {
         type: "text",
         isRequired: false,
         id: "eventEnd",
         description: "Дата окончания",
-        placeholder: "December 17, 1995 03:24:00"
+        placeholder: "December 18, 1995"
       },
       {
         type: "text",
@@ -53,26 +54,31 @@ export default class Form {
         placeholder: "Список участников"
       }
     ]
-    const inputFields = inputs.map((input) => {
-      return `
-        <div class="input-container">
-          <span>${ input.description }</span>
-          <input 
-            class="input input-add" 
-            id=${ input.id }
-            type=${ input.type } ${ input.isRequired ? "required" : "" }
-            placeholder=${ input.placeholder }
-          />
-        </div>
-      `
-    }).join("")
+    const inputFields = function(className) {
+      return inputs.map((input) => {
+        return `
+          <div class="input-container">
+            <span>${ input.description }</span>
+            <input 
+              class="input input-${ className? className : 'add' }" 
+              id="${ className ? className + input.id : input.id }"
+              type="${ input.type }"
+              placeholder="${ input.placeholder }"
+              ${ input.isRequired ? "required" : "" }
+            />
+          </div>
+        `
+      }).join("")
+    }
 
-    this.getForm = `
-      <form class="input-list section">
-        ${ inputFields }
-        <button class="button" type="submit">Добавить</button>
-      </form>
-    `
+    this.getForm = function(className, id) {
+      return `
+        <form class="${  className ? className + '-input' : 'input' }-list section">
+          ${ inputFields(className) }
+          <button ${ id? "id = change-button-" + id : ""  }  class="button" type="submit">${ className ? 'Подтвердить' : 'Добавить' }</button>
+        </form>
+      `
+    }
   }
 }
 
@@ -98,10 +104,11 @@ export function addFormLogic() {
     localStorage.setItem("events", JSON.stringify(events))
     const eventList = new EventList
     eventList.update()
+    const filter = new Filter
+    filter.update()
   }
   function onChangeHandler(event) {
     eventObject[event.target.id] = event.target.value
-    console.log(eventObject)
   }
 
   form.addEventListener("submit", (event) => {

@@ -1,4 +1,4 @@
-export default class {
+export default class Filter {
   constructor() {
     this.setOptions = function() {
       const typeListObj = new Set(JSON.parse(localStorage.getItem("events")).map((event) => event.eventType))
@@ -7,7 +7,7 @@ export default class {
         return `
           <option class="type-option" value="${ type }">${ type }</option>
         `
-      })
+      }).join("")
     }
     this.getFilter = function() {
       return `
@@ -19,6 +19,7 @@ export default class {
                 id="filterStart" 
                 class="filter-input-time input" 
                 type="text" 
+                placeholder="December 17, 1995"
                 required
               />
             </div>
@@ -27,20 +28,25 @@ export default class {
               <input 
                 id="filterEnd" 
                 class="filter-input-time input" 
-                type="text" 
+                type="text"
+                placeholder="December 18, 1995"
                 required
               />
             </div>
             <button class="button" type="submit">Фильтр по дате</button>
           </form>
           <form class="section-container filter-form-type">
-            <select multiple class="input-container type-input" required>
+            <select multiple="multiple" class="input-container type-input" required>
               ${ this.setOptions() }
             </select>
             <button class="button" type="submit">Фильтр по типу</button>
           </form>
         </section>
       `
+    }
+    this.update = function() {
+      document.querySelector(".type-input").innerHTML = this.setOptions()
+      addFilterLogic()
     }
   }
 }
@@ -70,41 +76,37 @@ export function addFilterLogic() {
         }
       })
     }
+
     timeForm.addEventListener("submit", function(event) {
       submitHandler(event)
     })
     filterInputs.map((input) => {
       input.addEventListener("input", function(event) {
         timeObject[event.target.id] = event.target.value
-        console.log(timeObject)
       })
     })
   }
-
   timeFilter()
+
   function typeFilter() {
-    const types = []
     const typeForm = document.querySelector(".filter-form-type")
-    const typeOptions = document.querySelectorAll(".type-option")
+    const typeSelect = document.querySelector(".type-input")
+    
     function submitHandler(event) {
       event.preventDefault()
-      
+      const types = Array.from(typeSelect.options).filter((option) => option.selected)
       eventList.map((item) => {
-      //   const eventElem = document.querySelector(`#${ item.id }`)
-      //   if (item.eventType !== type) {
-      //     eventElem.style.display = "none"
-      //   }
-      //   else {
-      //     eventElem.style.display = "block"
-      //   }
+        const eventElem = document.querySelector(`#${ item.id }`)
+        const check = types.some((type) => {
+          return item.eventType === type.value
+        })
+        if (!check) eventElem.style.display = "none"
+        else eventElem.style.display = "block"
       })
     }
+
     typeForm.addEventListener("submit", function(event) {
       submitHandler(event)
-    })
-    typeInput.addEventListener("change", function(event) {
-      // timeObject[event.target.id] = event.target.value
-      console.log(event.target)
     })
   }
   typeFilter()

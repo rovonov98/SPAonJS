@@ -1,6 +1,7 @@
 body {
   --main-indent: .3rem;
   --content-width: 30%;
+  --input-width: 45%;
 }
 * {
   margin: 0;
@@ -11,15 +12,14 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* width: var(--content-width); */
-  width: 100%;
-  margin: 0 auto;
-  /* border: 1px solid red; */
+  width: var(--input-width);
 }
 .input {
-  max-width: 95%;
   padding: var(--main-indent);
   margin-bottom: var(--main-indent)
+}
+.input:not(:placeholder-shown):invalid {
+  border: 1px solid red;
 }
 .button {
   background: rgba(65, 131, 215, 1);
@@ -29,22 +29,32 @@ body {
   min-width: 5rem;
   max-width: 10rem;
   padding: var(--main-indent);
+  margin-bottom: var(--main-indent);
+  cursor: pointer;
 }
 .buttons {
   display: flex;
-  justify-content: space-between;
-  cursor: pointer;
+  width: 100%;
+  justify-content: flex-end;
 }
 .link {
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 .event-container {
   display: block;
-  
+  min-width: 100%;
   padding: .5rem;
-  margin: .5rem;
+  margin-bottom: .5rem;
   box-shadow: 0 0 1rem -.1rem rgba(191, 191, 191, 1);
+}
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+.type-input {
+  margin-bottom: var(--main-indent);
 }
 .section {
   display: flex;
@@ -52,9 +62,14 @@ body {
   align-items: center;
   max-width: var(--content-width);
   margin: 1rem auto;
-  /* border: 1px solid blue; */
   padding: var(--main-indent);
   box-shadow: 0 0 1rem -.1rem rgba(191, 191, 191, 1);
+}
+.change-input-list-wrapper {
+  width: 100%;
+}
+.change-input-list {
+  max-width: 100%;
 }
 .section-container {
   display: flex;
@@ -65,22 +80,26 @@ body {
 }
 .event-item {
   display: flex;
-  margin: var(--main-indent);
+  margin-bottom: var(--main-indent);
 }
 .delete-button {
   z-index: 3;
-  border: 1px solid red;
+}
+.display-none {
+  display: none
 }
 @media screen and (max-width: 1200px) {
   body {
-    --content-width: 45%;
+    --content-width: 60%;
+    --input-width: 70%;
   }
 }
 @media screen and (max-width: 576px) {
   :root {
-    font-size: 10px;
+    font-size: 12px;
   }
   body {
     --content-width: 95%;
+    --input-width: 90%;
   }
 }

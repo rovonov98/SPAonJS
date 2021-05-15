@@ -6,20 +6,21 @@ export default class EventList {
       return (eventList.sort((a, b) => new Date(a.eventStart) - new Date(b.eventStart))
         .map((event) => {
           return `
-            <div class="event-container">
-              <a class="link" id="${ event.id }" href="events/${ event.id }"  data-link>
-                <div class="event-item">
-                  <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
-                </div>
-                <div class="event-item">
-                  <div>Тип: ${ event.eventType }</div>
-                </div>
-                <div class="event-item">
-                  <div>Заголовок: ${ event?.eventHeading || error }</div>
+            <div class="event-container" id="${ event.id }">
+              <a class="link" href="events/${ event.id }"  data-link>
+                <div>
+                  <div class="event-item">
+                    <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
+                  </div>
+                  <div class="event-item">
+                    <div>Тип: ${ event.eventType }</div>
+                  </div>
+                  <div class="event-item">
+                    <div>Заголовок: ${ event?.eventHeading || error }</div>
+                  </div>
                 </div>
               </a>
               <div class="event-item buttons">
-                <button class="button" id="change-${ event.id }">Изменить</button>
                 <button class="delete-button button" id="delete-${ event.id }">Удалить</button>
               </div>
             </div>
@@ -43,8 +44,10 @@ export default class EventList {
 export function addEventListLogic() {
   const eventList = JSON.parse(localStorage.getItem("events"))
   const listObj = new EventList
+
   function deleteButtonsHandle() {
     const deleteButtons = Array.from(document.querySelectorAll(".delete-button"))
+
     function deleteHandler(event) {
       event.stopPropagation()
       const filteredList = eventList.filter((item) => {
@@ -53,6 +56,7 @@ export function addEventListLogic() {
       localStorage.setItem("events", JSON.stringify(filteredList))
       listObj.update()
     }
+
     deleteButtons.map((button) => {
       button.addEventListener("click", function(event) {
         deleteHandler(event)

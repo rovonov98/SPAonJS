@@ -1,6 +1,6 @@
 import Home from "./views/Home.js"
-import Event from "./views/Events.js"
-import  AddLogic  from "./components/Logic.js"
+import Event from "./views/EventView.js"
+import AddLogic  from "./Logic/Logic.js"
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
@@ -42,7 +42,7 @@ const router = async () => {
   const view = new match.route.view(getParams(match))
 
   document.querySelector("#app").innerHTML = await view.getHtml()
-  AddLogic(match.route.path)
+  AddLogic(match.route.path, getParams(match))
 }
 
 window.addEventListener("popstate", router)

@@ -13,7 +13,7 @@ export default class extends AbstractView {
     const eventList = new EventList
     const filter = new Filter
     return `
-      ${ form.getForm }
+      ${ form.getForm() }
       ${ filter.getFilter() }
       ${ eventList.getItems() }
     `
