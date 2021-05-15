@@ -8,9 +8,10 @@ const addSpa = () => {
   document.body.addEventListener("click", e => {
     if (e.target.matches("[data-link]")) {
       e.preventDefault()
+      e.stopPropagation()
       navigateTo(e.target.href)
     } 
-  })
+  }, true)
 }
 
 const getParams = match => {
@@ -52,7 +53,6 @@ const router = async () => {
 
   document.querySelector("#app").innerHTML = await view.getHtml()
   AddLogic(match.route.path, getParams(match))
-  addSpa()
 }
 
 window.addEventListener("popstate", router)

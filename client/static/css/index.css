@@ -38,6 +38,7 @@ body {
   justify-content: flex-end;
 }
 .link {
+  display: block;
   text-decoration: none;
   color: black;
   cursor: pointer;

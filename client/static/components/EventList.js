@@ -7,16 +7,22 @@ export default class EventList {
         .map((event) => {
           return `
             <div class="event-container" id="${ event.id }" >
-              <a class="link" href="events/${ event.id }" data-link>
-                <div class="event-item">
-                  <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
-                </div>
-                <div class="event-item">
-                  <div>Тип: ${ event.eventType }</div>
-                </div>
-                <div class="event-item">
-                  <div>Заголовок: ${ event?.eventHeading || error }</div>
-                </div>
+              <a class="link" href="/events/${ event.id }" data-link>
+                <a class="event-item link" href="/events/${ event.id }" data-link>
+                  <a class="link" href="/events/${ event.id }" data-link>
+                    Время: ${ event.eventStart } - ${ event?.eventEnd || error }
+                  </a>
+                </a>
+                <a class="event-item link" href="/events/${ event.id }" data-link>
+                  <a class="link" href="/events/${ event.id }" data-link>
+                    Тип: ${ event.eventType }
+                  </a>
+                </a>
+                <a class="event-item link" href="/events/${ event.id }" data-link>
+                  <a class="link" href="/events/${ event.id }" data-link>
+                    Заголовок: ${ event?.eventHeading || error }
+                  </a>
+                </a>
               </a>
               <div class="event-item buttons">
                 <button class="delete-button button" id="delete-${ event.id }">Удалить</button>
