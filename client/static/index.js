@@ -5,17 +5,16 @@ import AddLogic  from "./Logic/Logic.js"
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
 const addSpa = () => {
-  document.body.addEventListener("click", e => {
-    e.preventDefault()
-    let event = e.target
-    if (!event.href) {
-      event = event.parentNode
-      if (!event.href) {
-        event = event.parentNode
+  document.body.addEventListener("click", event => {
+    if (!event.target.href) {
+      event = event.target.parentNode
+      if (!event.target.href) {
+        event = event.target.parentNode
       }
     }
-    if (event.matches("[data-link]")) {
-    navigateTo(event.href)
+    if (event.target.matches("[data-link]")) {
+    event.preventDefault
+    navigateTo(event.target.href)
     }
   })
 }
