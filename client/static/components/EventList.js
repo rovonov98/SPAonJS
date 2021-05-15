@@ -6,7 +6,7 @@ export default class EventList {
       return (eventList.sort((a, b) => new Date(a.eventStart) - new Date(b.eventStart))
         .map((event) => {
           return `
-            <div class="event-container" id="${ event.id }">
+            <div class="event-container" id="${ event.id }" >
               <a class="link" href="events/${ event.id }" data-link>
                 <div class="event-item">
                   <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
