@@ -8,16 +8,14 @@ export default class EventList {
           return `
             <div class="event-container" id="${ event.id }">
               <a class="link" href="events/${ event.id }" data-link>
-                <div>
-                  <div class="event-item">
-                    <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
-                  </div>
-                  <div class="event-item">
-                    <div>Тип: ${ event.eventType }</div>
-                  </div>
-                  <div class="event-item">
-                    <div>Заголовок: ${ event?.eventHeading || error }</div>
-                  </div>
+                <div class="event-item">
+                  <div>Время: ${ event.eventStart } - ${ event?.eventEnd || error }</div>
+                </div>
+                <div class="event-item">
+                  <div>Тип: ${ event.eventType }</div>
+                </div>
+                <div class="event-item">
+                  <div>Заголовок: ${ event?.eventHeading || error }</div>
                 </div>
               </a>
               <div class="event-item buttons">
@@ -49,7 +47,7 @@ export function addEventListLogic() {
     const deleteButtons = Array.from(document.querySelectorAll(".delete-button"))
 
     function deleteHandler(event) {
-      event.stopPropagation()
+      // event.stopPropagation()
       const filteredList = eventList.filter((item) => {
         return item.id !== event.target.id.replace("delete-", "")
       })

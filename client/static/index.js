@@ -6,9 +6,16 @@ const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(
 
 const addSpa = () => {
   document.body.addEventListener("click", e => {
-    if (e.target.matches("[data-link]")) {
-      e.preventDefault()
-      navigateTo(e.target.href)
+    e.preventDefault()
+    let event = e.target
+    if (!event.href) {
+      event = event.parentNode
+      if (!event.href) {
+        event = event.parentNode
+      }
+    }
+    if (event.matches("[data-link]")) {
+    navigateTo(event.href)
     }
   })
 }
@@ -58,6 +65,6 @@ const router = async () => {
 window.addEventListener("popstate", router)
 
 document.addEventListener("DOMContentLoaded", () => {
-  addSpa()
+  // addSpa()
   router()
 })
