@@ -9,7 +9,6 @@ const addSpa = () => {
     if (e.target.matches("[data-link]")) {
       e.preventDefault()
       e.stopPropagation()
-      console.log(e.target)
       navigateTo(e.target.href)
     } 
   }, true)
