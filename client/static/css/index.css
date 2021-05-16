@@ -43,6 +43,9 @@ body {
   color: black;
   cursor: pointer;
 }
+.under-link {
+  pointer-events: none;
+}
 .event-container {
   display: block;
   min-width: 100%;

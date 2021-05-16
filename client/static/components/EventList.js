@@ -8,21 +8,21 @@ export default class EventList {
           return `
             <div class="event-container" id="${ event.id }" >
               <a class="link" href="/events/${ event.id }" data-link>
-                <a class="event-item link" href="/events/${ event.id }" data-link>
-                  <a class="link" href="/events/${ event.id }" data-link>
+                <div class="under-link event-item link" href="/events/${ event.id }" data-link>
+                  <div class="under-link link" href="/events/${ event.id }" data-link>
                     Время: ${ event.eventStart } - ${ event?.eventEnd || error }
-                  </a>
-                </a>
-                <a class="event-item link" href="/events/${ event.id }" data-link>
-                  <a class="link" href="/events/${ event.id }" data-link>
+                  </div>
+               </div>
+                <div class="under-link event-item link" href="/events/${ event.id }" data-link>
+                  <div class="under-link link" href="/events/${ event.id }" data-link>
                     Тип: ${ event.eventType }
-                  </a>
-                </a>
-                <a class="event-item link" href="/events/${ event.id }" data-link>
-                  <a class="link" href="/events/${ event.id }" data-link>
+                  </div>
+              </div>
+               <div class="under-link event-item link" href="/events/${ event.id }" data-link>
+                  <div class="under-link link" href="/events/${ event.id }" data-link>
                     Заголовок: ${ event?.eventHeading || error }
-                  </a>
-                </a>
+                  </div>
+                 </div>
               </a>
               <div class="event-item buttons">
                 <button class="delete-button button" id="delete-${ event.id }">Удалить</button>
